@@ -99,7 +99,7 @@ def getPath (catalog, source, dst):
 
 def carga_bfs(catalog, source):
     search= dbs.newBFS(catalog['reviewGraph'], source)
-    catalogo['marcas_bfs']= search['visitedMap']
+    catalog['marcas_bfs']= search['visitedMap']
 
 def path_small(catalog, source, dst):
 
