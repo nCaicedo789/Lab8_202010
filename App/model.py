@@ -82,15 +82,15 @@ def getPath (catalog, source, dst):
     """
     mapa= catalog['marcas_dfs']
     grafo= catalog['reviewGraph']
-    path= catalogo['path_dfs']
+    path= catalog['path_dfs']
     if dst==source:
         return path
     if map.size(mapa)==0:
         dbs.depth_first_search(grafo,mapa,source)
 
-    nod_bus=map.get(mapa, dst)
+    nod_bus =map.get(mapa, dst)
     if nod_bus != None:
-        new_node=node_bus['predecesor']
+        new_node= nod_bus['predecesor']
         lt.addFirst(path,new_node)
         getPath(catalog,source,new_node)
 
@@ -104,15 +104,14 @@ def carga_bfs(catalog, source):
 def path_small(catalog, source, dst):
 
     mapa= catalog['marcas_bfs']
-    grafo= catalog['reviewGraph']
-    path= catalogo['path_bfs']
+    path= catalog['path_bfs']
     if dst==source:
         return path
     if mapa == None:
         carga_bfs(catalog, source)
     nod_bus=map.get(mapa, dst) 
     if nod_bus != None:
-        new_node=node_bus['predecesor']
+        new_node= nod_bus['predecesor']
         lt.addFirst(path,new_node)
         getPath(catalog,source,new_node)
     else:

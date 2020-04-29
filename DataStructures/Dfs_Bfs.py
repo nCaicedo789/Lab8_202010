@@ -28,7 +28,7 @@ def newBFS(graph, source):
     """
     Crea una busqueda BFS para un grafo y un vertice origen
     """
-    prime = nextPrime (ga.numVertex(graph) * 2)
+    prime = 11000
     search={'graph':graph, 's':source, 'visitedMap':None}
     search['visitedMap'] = map.newMap(capacity=prime, maptype='PROBING', comparefunction=compareByKey)
     map.put(search['visitedMap'],source, {'marked':True,'edgeTo':None,'nodo':source})
