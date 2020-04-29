@@ -41,7 +41,7 @@ def bfs (search, source):
     while not (q.isEmpty(queue)):
         v = q.dequeue (queue)
         list_ad=g.adjacents(search['graph'],v)
-        for i in range (1,(lt.size(list_ad)+1):
+        for i in range (1,(lt.size(list_ad)+1)):
             w=lt.getElement(list_ad,i)
             if map.get(search['visitedMap'],w) == None:
                 map.put(search['visitedMap'],w, {'marked':True,'edgeTo':None,'nodo':w})
