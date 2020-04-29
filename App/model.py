@@ -26,7 +26,7 @@ from ADT import graph as g
 from ADT import map as map
 from ADT import list as lt
 from DataStructures import listiterator as it
-from DataStructures import Dfs&Bfs as dbs
+from DataStructures import Dfs_Bfs as dbs
 from datetime import datetime
 
 """
