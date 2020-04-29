@@ -26,6 +26,7 @@ from ADT import graph as g
 from ADT import map as map
 from ADT import list as lt
 from DataStructures import listiterator as it
+from DataStructures Dfs&Bfs as dbs
 from datetime import datetime
 
 """
@@ -42,6 +43,12 @@ def newCatalog():
     """
     rgraph = g.newGraph(5500,compareByKey)
     catalog = {'reviewGraph':rgraph}    
+    marcas_dfs= map.newMap(capacity=11000, maptype='PROBING',comparefunction=compareByKey)
+    marcas_bfs= map.newMap(capacity=11000, maptype='PROBING',comparefunction=compareByKey)
+    path_dfs=lt.newList()
+    catalog['marcas_dfs']=marcas_dfs
+    catalog['marcas_bfs']=marcas_bfs
+    catalog['path_dfs']=path_dfs
     return catalog
 
 
@@ -74,11 +81,37 @@ def getPath (catalog, source, dst):
     """
     Retorna el camino, si existe, entre vertice origen y destino
     """
-    print("vertices: ",source,", ",dst)
-    # ejecutar dfs desde source
-    # obtener el camino hasta dst
-    # retornar el camino
-    return None
+    mapa= catalog['marcas_dfs']
+    grafo= catalog['reviewGraph']
+    path= catalogo['path_dfs']
+    if dst==source:
+        return path
+    if map.size(mapa)==0:
+        dbs.depth_first_search(grafo,mapa,source)
+    
+    if nod_bus=map.get(mapa, dst) != None:
+        new_node=node_bus['predecesor']
+        lt.addFirst(path,new_node)
+        getPath(catalog,source,new_node)
+    else:
+        return None
+
+def path_small(catalog, source, dst):
+
+    mapa= catalog['marcas_dfs']
+    grafo= catalog['reviewGraph']
+    path= catalogo['path_bfs']
+    if dst==source:
+        return path
+    if map.size(mapa)==0:
+        dbs.depth_first_search(grafo,mapa,source)
+    
+    if nod_bus=map.get(mapa, dst) != None:
+        new_node=node_bus['predecesor']
+        lt.addFirst(path,new_node)
+        getPath(catalog,source,new_node)
+    else:
+        return None
     
 # Funciones de comparacion
 
