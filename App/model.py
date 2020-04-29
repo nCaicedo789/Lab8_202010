@@ -44,10 +44,9 @@ def newCatalog():
     rgraph = g.newGraph(5500,compareByKey)
     catalog = {'reviewGraph':rgraph}    
     marcas_dfs= map.newMap(capacity=11000, maptype='PROBING',comparefunction=compareByKey)
-    marcas_bfs= map.newMap(capacity=11000, maptype='PROBING',comparefunction=compareByKey)
     path_dfs=lt.newList()
     catalog['marcas_dfs']=marcas_dfs
-    catalog['marcas_bfs']=marcas_bfs
+    catalog['marcas_bfs']=None
     catalog['path_dfs']=path_dfs
     return catalog
 
@@ -56,24 +55,24 @@ def addReviewNode (catalog, row):
     """
     Adiciona un nodo para almacenar un libro o usuario 
     """
-    if not g.containsVertex(catalog['reviewGraph'], row['book_id']):
-        g.insertVertex (catalog['reviewGraph'], row['book_id'])
-    if not g.containsVertex(catalog['reviewGraph'], row['user_id']):
-        g.insertVertex (catalog['reviewGraph'], row['user_id'])
+    if not g.containsVertex(catalog['delayGraph'], row['SOURCE']):
+        g.insertVertex (catalog['delayGraph'], row['SOURCE'])
+    if not g.containsVertex(catalog['delayGraph'], row['DEST']):
+        g.insertVertex (catalog['delayGraph'], row['DEST'])
 
 def addReviewEdge (catalog, row):
     """
     Adiciona un enlace para almacenar una revisión
     """
-    g.addEdge (catalog['reviewGraph'], row['book_id'], row['user_id'], row['rating'])
+    g.addEdge (catalog['delayGraph'], row['SOURCE'], row['DEST'], row['ARRIVAL_DELAY'])
 
 
 def countNodesEdges (catalog):
     """
     Retorna la cantidad de nodos y enlaces del grafo de revisiones
     """
-    nodes = g.numVertex(catalog['reviewGraph'])
-    edges = g.numEdges(catalog['reviewGraph'])
+    nodes = g.numVertex(catalog['delayGraph'])
+    edges = g.numEdges(catalog['delayGraph'])
 
     return nodes,edges
 
@@ -88,25 +87,31 @@ def getPath (catalog, source, dst):
         return path
     if map.size(mapa)==0:
         dbs.depth_first_search(grafo,mapa,source)
-    
-    if nod_bus=map.get(mapa, dst) != None:
+
+    nod_bus=map.get(mapa, dst)
+    if nod_bus != None:
         new_node=node_bus['predecesor']
         lt.addFirst(path,new_node)
         getPath(catalog,source,new_node)
+
     else:
         return None
 
+def carga_bfs(catalog, source):
+    search= dbs.newBFS(catalog['reviewGraph'], source)
+    catalogo['marcas_bfs']= search['visitedMap']
+
 def path_small(catalog, source, dst):
 
-    mapa= catalog['marcas_dfs']
+    mapa= catalog['marcas_bfs']
     grafo= catalog['reviewGraph']
     path= catalogo['path_bfs']
     if dst==source:
         return path
-    if map.size(mapa)==0:
-        dbs.depth_first_search(grafo,mapa,source)
-    
-    if nod_bus=map.get(mapa, dst) != None:
+    if mapa == None:
+        carga_bfs(catalog, source)
+    nod_bus=map.get(mapa, dst) 
+    if nod_bus != None:
         new_node=node_bus['predecesor']
         lt.addFirst(path,new_node)
         getPath(catalog,source,new_node)

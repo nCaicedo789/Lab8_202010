@@ -80,7 +80,9 @@ def main():
             lst = controller.getPath(catalog,vertices)
             print("El camino entre los vertices es:",lst)
         elif int(inputs[0])==4:
-            pass
+            vertices =input("Ingrese el vertice origen y destino\n")
+            lst = controller.getPathLeastEdges(catalog,vertices)
+            print("El camino entre los vertices es:",lst)
         else:
             sys.exit(0)
     sys.exit(0)
