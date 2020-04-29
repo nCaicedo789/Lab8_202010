@@ -42,7 +42,7 @@ def newCatalog():
     Inicializa el catálogo y retorna el catalogo inicializado.
     """
     rgraph = g.newGraph(5500,compareByKey)
-    catalog = {'reviewGraph':rgraph}    
+    catalog = {'delayGraph':rgraph}    
     marcas_dfs= map.newMap(capacity=11000, maptype='PROBING',comparefunction=compareByKey)
     path_dfs=lt.newList()
     catalog['marcas_dfs']=marcas_dfs
